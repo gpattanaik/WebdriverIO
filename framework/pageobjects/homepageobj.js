@@ -1,4 +1,4 @@
-
+import homePage from '../components/homepage';
 class homepageobj {
 
     // Webelements locators

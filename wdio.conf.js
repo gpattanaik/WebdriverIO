@@ -21,7 +21,7 @@ exports.config = {
     // will be called from there.
     //
     specs: [
-        './framework/feature/*.feature',
+        './framework/features/homepage.feature',
         //'./framework/**/*homepage.feature'
     ],
     // Patterns to exclude.
@@ -215,11 +215,11 @@ exports.config = {
      * @param {Array.<String>} specs        List of spec file paths that are to be run
      * @param {Object}         browser      instance of created browser/device session
      */
-    before: function (capabilities, specs) {
-        require("chai");
+    // before: function (capabilities, specs) {
+    //     require("chai");
 
-        global.expect = chai.expect;
-    },
+    //     global.expect = chai.expect;
+    // },
     /**
      * Runs before a WebdriverIO command gets executed.
      * @param {String} commandName hook command name
