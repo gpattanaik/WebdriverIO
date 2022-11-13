@@ -21,6 +21,7 @@
     "wdio-chromedriver-service": "^8.0.0"
   },
   "dependencies": {
-    "chai": "^4.3.7"
+    
+    "faker": "^5.5.3"
   }
 }

@@ -16,6 +16,12 @@ class homepageobj {
         return $('//button[@title="Continue"]');
     }
      /**
+     * 'I am a new customer' title on account login page
+     */
+      get lblnewCustomer() {
+        return $('//h2[text()="I am a new customer."]');
+    }
+     /**
      * Account first name input field on Create account page
      */
       get txtfName() {
@@ -78,7 +84,7 @@ class homepageobj {
     /**
      * Login field on Create account page
      */
-     get txtlogin() {
+     get txtloginName() {
         return $('//input[@id="AccountFrm_loginname"]');
     }     
     /**
@@ -98,8 +104,15 @@ class homepageobj {
      */
      get chkpvcPolicy() {
         return $('//input[@id="AccountFrm_agree"]');
-    }              
-    
+    }
+     /**
+     * Account has been created successful message 
+     */
+      get ActCreationSuccessMessage() {
+        return $('//span[text()=" Your Account Has Been Created!"]');
+    }                    
+
+  
 
     //Actions
 
@@ -108,10 +121,37 @@ class homepageobj {
      */
     async navigateToAccountLoginPg() {
         await this.btnRegActontinue.click();
-        console.log("Signin button is clicked")
+        await (await this.txtfName).waitForExist({ timeout: 2000});
+        console.log("Continue button is clicked")
     }
-     
+    /**
+     * New account creation
+     */
+    async accountCreation(email, address) {
+      await this.navigateToAccountLoginPg();
 
+      //Enter Your Personal Details
+      await (await this.txtfName).setValue(address.firstName);
+      await (await this.txtlName).setValue(address.lastName);
+      await (await this.emailID).setValue(email);
+
+      //Enter Your Address
+      await this.txtaddress.setValue(address.address1);
+      await (await this.txtcity).setValue("Aberdeen");
+      await (await this.ddlregState).selectByAttribute("value","Aberdeen");
+      await (await this.txtzipCode).setValue("AB10");
+
+      //Enter Login Details
+      await (await this.txtloginName).setValue("gkp123");
+      await (await this.txtpassword).setValue("12345");
+      await (await this.txtpasswordConfrm).setValue("12345");
+      await (await this.chkpvcPolicy).click();
+
+      //Click on Continue button
+      await this.btnRegActontinue.click();
+      await (await this.ActCreationSuccessMessage).waitForExist({ timeout: 5000});
+      console.log("Congratulations! Your new account has been successfully created!")
+    }
     
 }
 export default new homepageobj();

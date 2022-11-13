@@ -1,10 +1,10 @@
 Feature: SignIn, Login and Purchase Product
+# New user register
 
 Scenario: TC-001 Create New User/Signin
 
     Given I am on the home page
-    # Then Navigate to Signup page
-    # And create an account 
+    When Navigate to Signup page
+    Then Create an account 
     
-
 Examples:
