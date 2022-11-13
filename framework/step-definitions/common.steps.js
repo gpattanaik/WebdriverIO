@@ -36,6 +36,9 @@ Then(/^Create an account$/, async() => {
         address1: faker.address.address(),
 
     };
+    //Global variable declaration
+    global.SharedVariable.email=emailID;
+    global.SharedVariable.address=addrObj;
     await homepageobj.accountCreation(emailID,addrObj);
 
 

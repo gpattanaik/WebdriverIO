@@ -133,8 +133,12 @@ exports.config = {
     // Test reporter for stdout.
     // The only one supported by default is 'dot'
     // see also: https://webdriver.io/docs/dot-reporter
-    reporters: ['spec',['allure', {outputDir: 'allure-results'}]],
-
+    //reporters: ['spec',['allure', {outputDir: 'allure-results'}]],
+    reporters: [['allure', {
+        outputDir: 'allure-results',
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: true,
+    }]],
 
     //
     // If you are using Cucumber you need to specify the location of your step definitions.
@@ -216,9 +220,6 @@ exports.config = {
      * @param {Object}         browser      instance of created browser/device session
      */
     // before: function (capabilities, specs) {
-    //     require("chai");
-
-    //     global.expect = chai.expect;
     // },
     /**
      * Runs before a WebdriverIO command gets executed.
@@ -234,8 +235,15 @@ exports.config = {
      * @param {String}                   uri      path to feature file
      * @param {GherkinDocument.IFeature} feature  Cucumber feature object
      */
-    // beforeFeature: function (uri, feature) {
-    // },
+    beforeFeature: function (uri, feature) {
+        global.SharedVariable = {
+          email: "",
+          address: {},
+        };
+    // Maximize window
+    browser.maximizeWindow();
+
+    },
     /**
      *
      * Runs before a Cucumber Scenario.
