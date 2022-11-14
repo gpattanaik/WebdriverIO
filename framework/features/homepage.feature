@@ -7,4 +7,3 @@ Scenario: TC-001 Create New User/Signin
     When Navigate to Signup page
     Then Create an account 
     
-Examples:
