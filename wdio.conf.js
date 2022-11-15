@@ -21,7 +21,7 @@ exports.config = {
     // will be called from there.
     //
     specs: [
-        './framework/features/homepage.feature',
+        './framework/features/*.feature',
         //'./framework/**/*homepage.feature'
     ],
     // Patterns to exclude.

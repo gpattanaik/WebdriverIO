@@ -10,38 +10,37 @@ import { faker } from '@faker-js/faker';
  */
 Given(/^I am on the home page$/, async() => {
     await homePage.openHomePage(); 
-    await expect(homepageobj.btnRegActontinue).toBePresent();
+    await (await homepageobj.lnkloginReg).waitForDisplayed({ timeout: 5000});
     console.log("Navigate to Home Page");
 });
 /**
  * Navigate to Account Login page
  */
 When(/^Navigate to Signup page$/, async() => {
-    await homepageobj.navigateToAccountLoginPg();
-    await expect(homepageobj.lblnewCustomer).toBePresent();
+    await homepageobj.clickOnLoginRegLnk();
+    await (await homepageobj.btnRegAccountContinue).waitForDisplayed({ timeout: 5000});
     console.log("Navigate to Account Login Page");
+    await browser.pause(5000);
 });
 /**
  * Create an new account with required data
  */
-Then(/^Create an account$/, async() => {
-    console.log("Account Creation");
-    //generate random unique email each tiem
-    const randomStr = Math.random().toString(36).substring(2, 5);
-    const emailID = `myemail_${randomStr}@gmail.com`;
-    //Create address
-    const addrObj =  {
-        firstName: faker.name.firstName(),
-        lastname: faker.name.lastname(),
-        address1: faker.address.address(),
-
-    };
-    //Global variable declaration
-    global.SharedVariable.email=emailID;
-    global.SharedVariable.address=addrObj;
-    await homepageobj.accountCreation(emailID,addrObj);
-
-
+Then(/^Create an account by entering following details$/, async (DataTable) => {
+    console.log("......Account Creation........");
+    var data = DataTable.raw();
+    await homepageobj.accountCreation(data);
 });
- 
 
+/**
+ * Login with credential
+ */
+When(/^Login using (\w+) and (.+)$/, async (username, password) => {
+    await homepageobj.login(username, password)
+});
+/**
+ * Verify the My account page
+ */
+Then(/^Verify the title of the page$/, async() => {
+    await homepageobj.lblMyAccount.waitForDisplayed({ timeout: 10000});
+      console.log("Login Successfuls")
+});

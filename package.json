@@ -4,7 +4,7 @@
   "description": "cucumber webdriverio project",
   "main": "index.js",
   "scripts": {
-    "test": "npx run wdio wdio.conf.js"
+    "test": "wdio wdio.conf.js"
   },
   "author": "Gopal Pattanaik",
   "license": "ISC",
@@ -21,7 +21,6 @@
     "wdio-chromedriver-service": "^8.0.0"
   },
   "dependencies": {
-    
-    "faker": "^5.5.3"
+    "@faker-js/faker": "^7.6.0"
   }
 }
